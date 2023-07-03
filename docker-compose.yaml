@@ -1,16 +1,22 @@
 version: '3.5'
 
 services:
- pg_db:
-	container_name: pg_db
-	ports:
-	 - '5432:5432'
-	environment:
-	 - POSTGRE_PASSWORD=postgres
-	 - POSTGRES_USER=postgres
-	image: postgres:15.3-alpine3.18
-	volumes:
-	 - pg_db_data:/var/lib/postgresql/data
+  pg_db:
+    container_name: pg_db
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+    image: postgres:15.3-alpine3.18
+    volumes:
+      - pg_db_data:/var/lib/postresql/data
+
+  app:
+    build:
+      context: .
+    container_name: fastapi
+
 
 volumes:
- pg_db_data: null
+  pg_db_data: null
